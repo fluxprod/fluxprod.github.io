@@ -331,9 +331,9 @@
     padding:10px var(--pad-r) calc(10px + env(safe-area-inset-bottom)) var(--gutter);
     background:var(--ink);
     border-top:1px solid var(--hair);
-    transform:translateY(0);transition:transform .32s cubic-bezier(.22,.9,.25,1);
+    transform:translateY(0);transition:transform .38s cubic-bezier(.22,.9,.25,1),opacity .3s ease;
   }
-  .dock.hide{transform:translateY(130%)}
+  .dock.hide{transform:translateY(130%);opacity:0}
   .dock .in{max-width:560px;margin:0 auto;display:flex;gap:8px}
   .dock a{
     display:flex;align-items:center;justify-content:center;gap:8px;
@@ -608,13 +608,18 @@
       energy = Math.min(1.6, energy + Math.abs(d) * 0.012);
       boost  = Math.min(90, boost + Math.abs(d) * 0.8);
       activeStep();
+      updateDock();
     }
     window.addEventListener('scroll', onScroll, {passive:true});
 
-    if ('IntersectionObserver' in window && bigCta){
-      new IntersectionObserver(function(entries){
-        dock.classList.toggle('hide', entries[0].isIntersecting);
-      }, {threshold: 0.55}).observe(bigCta);
+    // прячем нижнюю панель только когда большая кнопка уверенно вошла в экран,
+    // и возвращаем чуть раньше — иначе на пороге она дёргается
+    function updateDock(){
+      if (!bigCta || !dock) return;
+      var top = bigCta.getBoundingClientRect().top;
+      var vh = window.innerHeight;
+      if (top < vh - 150) dock.classList.add('hide');
+      else if (top > vh - 70) dock.classList.remove('hide');
     }
 
     /* ---------------- spotlight follows finger / cursor ---------------- */
@@ -1106,6 +1111,7 @@
     refresh();
     if (!calm) requestAnimationFrame(frame);
         activeStep();
+      updateDock();
     onScroll();
 
     /* ---- лёгкий режим для слабых телефонов ---- */
