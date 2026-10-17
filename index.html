@@ -979,12 +979,21 @@
 
     function size(){
       var r = canvas.getBoundingClientRect();
+      padNow();
       W = Math.max(1, r.width); H = Math.max(1, r.height);
       canvas.width = Math.round(W * DPR);
       canvas.height = Math.round(H * DPR);
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     }
-    function envelope(x){ return Math.pow(Math.sin(Math.PI * Math.min(1, x / W)), 0.55); }
+    // волна не должна упираться в края экрана и ползти под пунктир справа
+    var padX = 18;
+    function padNow(){ padX = Math.max(12, Math.round(W * 0.05)); return padX; }
+    function envelope(x){
+      var pad = padX;
+      var u = (x - pad) / Math.max(1, W - pad * 2);
+      u = Math.max(0, Math.min(1, u));
+      return Math.pow(Math.sin(Math.PI * u), 0.55);
+    }
     function profile(x, phase){
       var a = (Math.sin(x * 0.058 + phase) * 0.5 + 0.5) * 0.5;
       var b = (Math.sin(x * 0.113 - phase * 0.7) * 0.5 + 0.5) * 0.3;
@@ -994,13 +1003,13 @@
     function trace(phase, a, color, lw, glow){
       var mid = H / 2;
       ctx.beginPath();
-      for (var x = 0; x <= W; x += coarse){
+      for (var x = padX; x <= W - padX; x += coarse){
         var h = profile(x, phase) * a * H * 0.5 * envelope(x);
         if (hotAge < 1){
           var d = (x - hotX) / 62;
           h *= 1 + 1.45 * Math.exp(-d * d) * (1 - hotAge);
         }
-        if (x === 0) ctx.moveTo(x, mid - h); else ctx.lineTo(x, mid - h);
+        if (x === padX) ctx.moveTo(x, mid - h); else ctx.lineTo(x, mid - h);
       }
       ctx.lineJoin = 'round'; ctx.lineCap = 'round';
       ctx.lineWidth = lw; ctx.strokeStyle = color;
