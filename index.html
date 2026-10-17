@@ -30,7 +30,6 @@
     --paper:#fcfcfc;
     --grey:#7e7e7e;
     --hair:rgba(252,252,252,.13);
-    --rail:6px;
     --gutter:20px;
     --pad-r:32px;
     --mx:50%;
@@ -72,38 +71,6 @@
     transition:opacity .5s ease-out, transform .5s ease-out;
   }
   .pulse.beat{opacity:.42;transform:scale(1.04)}
-
-  /* ---------- level rail ---------- */
-  .rail{
-    position:fixed;top:0;right:11px;
-    width:var(--rail);height:100vh;height:100svh;z-index:4;
-    pointer-events:none;
-  }
-  .rail .track{
-    position:absolute;inset:0;border-radius:99px;
-    background:rgba(252,252,252,.09);
-    overflow:hidden;
-  }
-  .rail .track::after{
-    content:"";position:absolute;inset:0;z-index:2;
-    background:repeating-linear-gradient(180deg,transparent 0 5px,var(--ink) 5px 8px);
-  }
-  .rail .level{
-    position:absolute;left:0;right:0;top:0;height:72%;
-    background:linear-gradient(180deg,var(--lime),rgba(219,255,69,.55));
-    border-radius:99px;
-    transition:height .14s linear;
-    box-shadow:0 0 14px rgba(219,255,69,.45);
-  }
-  .rail .peak{
-    position:absolute;left:-2px;right:-2px;height:2px;
-    background:var(--paper);opacity:.85;border-radius:2px;
-    top:72%;transition:top .18s ease-out;
-  }
-  @keyframes sweep{from{height:0}to{height:72%}}
-  @media (prefers-reduced-motion: no-preference){
-    .rail .level{animation:sweep 1.05s cubic-bezier(.2,.85,.25,1)}
-  }
 
   /* ---------- shell ---------- */
   .wrap{
@@ -397,7 +364,6 @@
   }
 
   @media (min-width:640px){
-    .rail{right:calc(50% - 298px)}
     :root{--pad-r:44px}
     .tracks{display:flex;gap:6px;margin-top:11px}
   .tr{
@@ -461,10 +427,6 @@
 <div class="spot" id="spot" aria-hidden="true"></div>
 <div class="cur" id="cur" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
-
-<div class="rail" aria-hidden="true">
-  <div class="track"><div class="level" id="level"></div><div class="peak" id="peak"></div></div>
-</div>
 
 <div class="wrap">
   <header class="in1 d0">
@@ -596,18 +558,11 @@
     var hover = window.matchMedia('(hover: hover)').matches;
 
     /* ---------------- rail + scroll signal ---------------- */
-    var level = document.getElementById('level');
-    var peak  = document.getElementById('peak');
     var dock  = document.getElementById('dock');
     var bigCta = document.querySelector('.out .tg');
     var energy = 0, lastY = window.scrollY, boost = 0;
 
-    function paint(pct){ level.style.height = pct + '%'; peak.style.top = pct + '%'; }
-
     function onScroll(){
-      var h = document.documentElement.scrollHeight - window.innerHeight;
-      var p = h > 0 ? window.scrollY / h : 0;
-      paint(12 + p * 88);
       var d = window.scrollY - lastY;
       lastY = window.scrollY;
       energy = Math.min(1.6, energy + Math.abs(d) * 0.012);
@@ -970,7 +925,7 @@
     if (!wrap || !canvas || !canvas.getContext) return;
 
     var ctx = canvas.getContext('2d');
-    var DPR = Math.min(2, window.devicePixelRatio || 1);
+    var DPR = Math.min(3, window.devicePixelRatio || 1);
     var W = 0, H = 0, t = 0, amp = 0.38, visible = true;
     var hint = document.getElementById('waveHint');
     var ripples = [], lastBeat = 0;
@@ -987,7 +942,7 @@
     }
     // волна не должна упираться в края экрана и ползти под пунктир справа
     var padX = 18;
-    function padNow(){ padX = Math.max(12, Math.round(W * 0.05)); return padX; }
+    function padNow(){ padX = Math.max(10, Math.round(W * 0.032)); return padX; }
     function envelope(x){
       var pad = padX;
       var u = (x - pad) / Math.max(1, W - pad * 2);
@@ -1031,8 +986,8 @@
     }
     function render(){
       ctx.clearRect(0, 0, W, H);
-      trace(t * 0.82 + 2.1, amp * 0.66, 'rgba(219,255,69,.28)', 1.5, 0);
-      trace(t, amp, '#dbff45', 2, 16);
+      trace(t * 0.82 + 2.1, amp * 0.66, 'rgba(219,255,69,.30)', 1.7, 0);
+      trace(t, amp, '#dbff45', 2.4, 18);
       drawRipples();
     }
     var slowFrames = 0, prevNow = 0, coarse = 2;
