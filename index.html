@@ -113,7 +113,7 @@
     touch-action:pan-y;cursor:grab;
   }
   .tracks{display:flex;gap:6px;margin-top:11px}
-  .tr{
+  .tr{min-height:44px;
     flex:1 1 0;min-width:0;min-height:40px;border-radius:9px;
     border:1px solid var(--hair);background:transparent;color:rgba(252,252,252,.62);
     font-family:inherit;font-size:10.5px;font-weight:500;letter-spacing:.05em;cursor:pointer;
@@ -151,7 +151,7 @@
   .wave > .seek{margin-top:2px}
   .plabel{font-size:10.5px;font-weight:400;letter-spacing:.06em;color:rgba(252,252,252,.72)}
   .ptime{font-size:10px;font-weight:300;color:var(--grey);font-variant-numeric:tabular-nums;white-space:nowrap}
-  .seek{
+  .seek{padding:7px 0;height:44px;
     -webkit-appearance:none;appearance:none;display:block;width:100%;
     height:30px;margin:0;padding:0;background:transparent;cursor:pointer;
   }
@@ -366,7 +366,7 @@
   @media (min-width:640px){
     :root{--pad-r:44px}
     .tracks{display:flex;gap:6px;margin-top:11px}
-  .tr{
+  .tr{min-height:44px;
     flex:1 1 0;min-width:0;min-height:40px;border-radius:9px;
     border:1px solid var(--hair);background:transparent;color:rgba(252,252,252,.62);
     font-family:inherit;font-size:10.5px;font-weight:500;letter-spacing:.05em;cursor:pointer;
@@ -384,7 +384,7 @@
     h1{font-size:52px;max-width:13ch}
     .lede{font-size:14.5px;max-width:34ch}
     .tracks{display:flex;gap:6px;margin-top:11px}
-  .tr{
+  .tr{min-height:44px;
     flex:1 1 0;min-width:0;min-height:40px;border-radius:9px;
     border:1px solid var(--hair);background:transparent;color:rgba(252,252,252,.62);
     font-family:inherit;font-size:10.5px;font-weight:500;letter-spacing:.05em;cursor:pointer;
@@ -419,6 +419,53 @@
     .spot{display:none}
     .grain{display:none}
   }
+
+  /* ---------- до / после ---------- */
+  .ab{margin-top:clamp(34px,6vh,50px);padding-top:24px;border-top:1px solid rgba(252,252,252,.10)}
+  .ab-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .ab-label{font-size:9.5px;letter-spacing:.1em;color:var(--lime);text-transform:uppercase;white-space:nowrap}
+  .ab-time{font-size:10.5px;color:rgba(252,252,252,.55);font-variant-numeric:tabular-nums;white-space:nowrap;flex:0 0 auto}
+
+  .ab-sub{margin-top:7px;font-size:10.5px;line-height:1.45;color:rgba(252,252,252,.58);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ab-ex{display:flex;gap:6px;margin-top:11px}
+  .ab-ex button{
+    flex:1 1 0;min-height:44px;border-radius:9px;border:1px solid rgba(252,252,252,.14);
+    background:transparent;color:rgba(252,252,252,.62);font-family:inherit;font-size:10.5px;
+    letter-spacing:.05em;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease;
+  }
+  .ab-ex button:hover:not(.on){border-color:rgba(219,255,69,.45);color:var(--paper)}
+  .ab-ex button.on{background:var(--lime);color:#0d0d0d;border-color:var(--lime)}
+  .ab-ex button:active{transform:scale(.97)}
+
+  .ab-line{display:flex;align-items:center;gap:16px;margin-top:16px}
+  .ab .play{margin:0}
+  .ab-prow{flex:1;min-width:0;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .ab-prow b{font-size:13px;font-weight:500;color:rgba(252,252,252,.85)}
+  .ab-prow b em{font-style:normal;color:var(--lime)}
+
+  .ab-switch{margin-top:10px;display:flex;gap:6px;background:rgba(252,252,252,.05);
+    border:1px solid rgba(252,252,252,.12);border-radius:12px;padding:4px}
+  .ab-switch button{
+    border:0;background:transparent;color:rgba(252,252,252,.62);font-family:inherit;
+    font-size:11.5px;letter-spacing:.02em;padding:13px 16px;border-radius:9px;cursor:pointer;
+    transition:background .18s ease,color .18s ease;
+  }
+  .ab-switch button:hover:not(.on){color:var(--paper)}
+  .ab-switch button.on{background:var(--lime);color:#0d0d0d}
+  .ab-switch button:active{transform:scale(.97)}
+
+  .ab-switch button{flex:1}
+  .plabel{font-size:13px;font-weight:500;letter-spacing:-.005em;color:rgba(252,252,252,.85)}
+  .ptime{font-size:10.5px;font-weight:400;color:rgba(252,252,252,.55)}
+  .plabel em{font-style:normal;color:var(--lime)}
+  .wave-label{font-size:9.5px;letter-spacing:.1em;color:var(--lime);text-transform:uppercase}
+</style>
+<style id=TOUCH-44>
+  .tr{min-height:44px}
+  .seek{height:44px;padding:7px 0}
+  .ab-ex button{min-height:44px}
+  .ab-switch button{min-height:44px;display:flex;align-items:center;justify-content:center}
+  #liteBtn{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
@@ -440,13 +487,13 @@
     <div class="rule"></div>
     <p class="lede in1 d2">Пишу бит с нуля под твои референсы и довожу вокал до релизного звука. Жанры — от архивкора до шансона. <b>Полные права, до пяти правок, все файлы.</b></p>
 
-    <div class="wave-label">тут можно быстро послушать пару моих работ</div>
+    <div class="wave-label">мои работы · примеры</div>
     <div class="wave" id="wave">
       <canvas id="waveCanvas" aria-hidden="true"></canvas>
       <div class="player" id="player" hidden>
         <button id="play" class="play" type="button" aria-label="Слушать мои работы" aria-pressed="false"><span class="ico"><i></i><i></i></span></button>
         <div class="pmain">
-          <div class="prow"><span class="plabel">нажми play</span><span class="ptime" id="ptime">0:00</span></div>
+          <div class="prow"><span class="plabel">нажми <em>play</em></span><span class="ptime" id="ptime">0:00</span></div>
         </div>
       </div>
       <input id="seek" class="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Перемотка трека">
@@ -458,6 +505,37 @@
         <button class="tr" type="button" data-i="4" aria-pressed="false">05</button>
       </div>
 
+    </div>
+
+    <div class="ab in1 d2" id="ab">
+      <div class="ab-head">
+        <div class="ab-label">сведение · до / после</div>
+      </div>
+
+      <div class="ab-sub">три работы · сравни до и после</div>
+
+      <div class="ab-line">
+        <button class="play" id="abPlay" type="button" aria-label="Слушать"><span class="ico"><i></i><i></i></span></button>
+
+        <div class="ab-prow">
+          <b id="abStage">сравни <em>до</em> и <em>после</em></b>
+          <span class="ab-time" id="abTime">0:00</span>
+        </div>
+
+      </div>
+
+      <input id="abSeek" class="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Перемотка">
+
+      <div class="ab-switch" id="abSwitch" role="group" aria-label="Версия">
+        <button type="button" data-v="0" class="on">до</button>
+        <button type="button" data-v="1">после</button>
+      </div>
+
+      <div class="ab-ex" id="abEx" role="group" aria-label="Пример">
+        <button type="button" data-p="0">01</button>
+        <button type="button" data-p="1">02</button>
+        <button type="button" data-p="2">03</button>
+      </div>
     </div>
 
     <div class="rack in1 d2">
@@ -845,13 +923,13 @@
       });
       audio.addEventListener('play', function(){
         playing = true; uiOn(true);
-        if (audio.readyState < 3 && labelEl){ labelEl.textContent = 'загружаю 0%'; loading = true; }
+        if (audio.readyState < 3 && labelEl){ labelEl.textContent = 'загружаю…'; loading = true; }
       });
       audio.addEventListener('progress', function(){
         if (!loading || !audio.duration || !audio.buffered.length) return;
         var end = audio.buffered.end(audio.buffered.length - 1);
         var pct = Math.min(99, Math.round(100 * end / audio.duration));
-        if (labelEl) labelEl.textContent = 'загружаю ' + pct + '%';
+        if (labelEl) labelEl.textContent = 'загружаю…';
       });
       audio.addEventListener('playing', function(){
         loading = false;
@@ -1106,6 +1184,259 @@
     }
     if (liteOn){ size(); render(); }
   })();
+</script>
+
+<script>
+(function(){
+  var ctx = null, master = null;
+  var pairs = [];           // [{a: AudioBuffer, b: AudioBuffer}]
+  var ex = 0, cur = 0;      // пример и версия (0 до, 1 после)
+  var srcA = null, srcB = null, gainA = null, gainB = null;
+  var playing = false, startedAt = 0, offset = 0, raf = 0;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var play = $('abPlay'), stage = $('abStage'), timeEl = $('abTime');
+  var exBox = $('abEx'), sw = $('abSwitch'), seekEl = $('abSeek');
+  var exBtns = [].slice.call(exBox.querySelectorAll('button'));
+  var vBtns = [].slice.call(sw.querySelectorAll('button'));
+  var mainAudio = document.getElementById('audio');
+
+  var FILES = ['ex1','ex2','ex3'];
+  // -2 дБ для версии «до»: 10^(-2/20) = 0.794
+  var TRIM = [0.794, 1.0];
+  var FADE_OUT = 3;   // гашение в конце
+
+  function pair(){ return pairs[ex]; }
+  function buf(){ var pr = pair(); if (!pr) return null; return cur === 1 ? pr.b : pr.a; }
+  function len(){ var b = buf(); return b ? b.duration : 0; }
+
+  function fmt(t){ t = Math.max(0, Math.floor(t||0)); return Math.floor(t/60) + ':' + ('0'+(t%60)).slice(-2); }
+  function now(){ return playing ? Math.max(0, Math.min(len(), offset + (ctx.currentTime - startedAt))) : offset; }
+
+  var chosen = false;
+  function paint(){
+    var e = now(), pct = len() ? e / len() : 0;
+    timeEl.textContent = fmt(e) + ' / ' + fmt(len());
+    if (seekEl && !seekEl.dragging){
+      seekEl.value = Math.round(pct * 1000);
+      seekEl.style.setProperty('--p', (pct * 100).toFixed(1) + '%');
+    }
+    if (playing) stage.innerHTML = cur === 1 ? 'звучит <em>после</em>' : 'звучит <em>до</em>';
+  }
+
+  function killSrc(){
+    [srcA, srcB].forEach(function(s){ if (s){ try{ s.stop(); }catch(e){} s.disconnect(); } });
+    [gainA, gainB].forEach(function(g){ if (g){ try{ g.disconnect(); }catch(e){} } });
+    srcA = srcB = gainA = gainB = null;
+    cancelAnimationFrame(raf);
+    playing = false;
+    play.classList.remove('on');
+  }
+
+  function tickFn(){
+    if (!playing) return;
+    if (now() >= len() - 0.03){
+      killSrc(); offset = 0; paint();
+      stage.innerHTML = 'сравни <em>до</em> и <em>после</em>';
+      return;
+    }
+    paint();
+    raf = requestAnimationFrame(tickFn);
+  }
+
+  // затухание в конце файла
+  function scheduleOut(g, lvl, startPos, at, dur){
+    var endAt = at + Math.max(0.05, dur - startPos);
+    var outStart = endAt - FADE_OUT;
+    if (outStart > at + 0.2){
+      g.gain.setValueAtTime(lvl, outStart);
+      g.gain.linearRampToValueAtTime(0, endAt);
+    }
+  }
+
+  // выравнивание громкости: считаем RMS и подбираем усиление
+  function levelOf(v){
+    var pr = pairs[ex];
+    if (!pr) return 1;
+    var key = v === 1 ? 'gb' : 'ga';
+    if (!pr[key]){
+      var b = v === 1 ? pr.b : pr.a;
+      var ch = b.getChannelData(0), s = 0, n = 0;
+      for (var i = 0; i < ch.length; i += 97){ s += ch[i] * ch[i]; n++; }
+      var r = Math.sqrt(s / Math.max(1, n));
+      pr[key] = Math.max(0.75, Math.min(3.4, 0.17 / Math.max(0.02, r)));
+    }
+    return pr[key];
+  }
+
+  // обе версии стартуют одновременно: переключение = только громкость, без стыков
+  function startBoth(from){\n  async function selectExample(i){
+    chosen = true;
+    exBtns.forEach(function(x){ x.classList.toggle('on', +x.dataset.p === i); });
+    if (i === ex) return;
+    var wasPlaying = playing;
+    killSrc();
+    ex = i;
+    offset = 0;
+    paint();
+    stage.innerHTML = 'сравни <em>до</em> и <em>после</em>';
+    if (!pairs[ex]){
+      stage.textContent = 'загружаю…';
+      try { await loadPair(ex); } catch(e){ stage.textContent = 'не загрузилось'; return; }
+    }
+    paint();
+    if (wasPlaying) startBoth(0);
+  }
+
+
+    killSrc();
+    if (mainAudio) mainAudio.pause();
+    var pr = pairs[ex];
+    if (!pr) return;
+    var at = ctx.currentTime + 0.08;
+    var f0 = Math.max(0, Math.min(pr.a.duration - 0.05, from));
+
+    function mk(buffer, lvl, on){
+      var s = ctx.createBufferSource();
+      s.buffer = buffer;
+      var g = ctx.createGain();
+      g.gain.value = 0;
+      s.connect(g); g.connect(master);
+      s.start(at, Math.max(0, Math.min(buffer.duration - 0.02, f0)));
+      if (on){
+        g.gain.setValueAtTime(0, at);
+        g.gain.linearRampToValueAtTime(lvl, at + 0.05);
+        scheduleOut(g, lvl, f0, at, buffer.duration);
+      }
+      return [s, g];
+    }
+
+    var lvA = TRIM[0] * levelOf(0), lvB = TRIM[1] * levelOf(1);
+    var A = mk(pr.a, lvA, cur === 0);
+    var B = mk(pr.b, lvB, cur === 1);
+    srcA = A[0]; gainA = A[1]; srcB = B[0]; gainB = B[1];
+
+    startedAt = at;
+    offset = f0;
+    playing = true;
+    play.classList.add('on');
+    paint();
+    raf = requestAnimationFrame(tickFn);
+  }
+
+  // переключение версии: 60 мс кроссфейд между двумя уже играющими источниками
+  function switchVersion(next){
+    if (next === cur) return;
+    cur = next;
+    vBtns.forEach(function(x){ x.classList.toggle('on', +x.dataset.v === cur); });
+    if (!playing){ offset = Math.min(now(), len() - 0.05); paint(); return; }
+
+    var T = ctx.currentTime + 0.02;
+    var lvA = TRIM[0] * levelOf(0), lvB = TRIM[1] * levelOf(1);
+    var toB = (cur === 1);
+    var up = toB ? gainB : gainA, down = toB ? gainA : gainB;
+    var upLvl = toB ? lvB : lvA;
+    var dur = buf().duration, pos = now() + 0.02;
+
+    if (up){
+      up.gain.cancelScheduledValues(T - 0.01);
+      up.gain.setValueAtTime(0, T);
+      up.gain.linearRampToValueAtTime(upLvl, T + 0.06);
+      scheduleOut(up, upLvl, pos, T, dur);
+    }
+    if (down){
+      down.gain.cancelScheduledValues(T - 0.01);
+      down.gain.setValueAtTime(down.gain.value || 0, T);
+      down.gain.linearRampToValueAtTime(0, T + 0.06);
+    }
+    paint();
+  }
+
+  async function start(from){
+    if (!ctx){
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch(e){}
+      master = ctx.createGain(); master.gain.value = 1.0; master.connect(ctx.destination);
+    }
+    if (!pairs[ex]){
+      stage.textContent = 'загружаю…';
+      try { await loadPair(ex); } catch(e){ stage.textContent = 'не загрузилось'; return; }
+    }
+    if (ctx.state === 'suspended') { try { await ctx.resume(); } catch(e){} }
+    startBoth(from);
+  }
+
+  // грузим по одному примеру и только когда он нужен
+  async function loadPair(i){
+    if (pairs[i]) return pairs[i];
+    var a = await fetch(FILES[i] + '-before.mp3?v=6', {cache:'no-cache'}).then(function(r){ return r.arrayBuffer(); });
+    var b = await fetch(FILES[i] + '-after.mp3?v=6', {cache:'no-cache'}).then(function(r){ return r.arrayBuffer(); });
+    pairs[i] = { a: await ctx.decodeAudioData(a), b: await ctx.decodeAudioData(b) };
+    return pairs[i];
+  }
+
+  async function load(){
+    await loadPair(0);
+    paint();
+  }
+
+  play.addEventListener('click', function(){
+    if (ctx && ctx.state === 'suspended') { try { ctx.resume(); } catch(e){} }
+    if (!chosen){ chosen = true; exBtns[0].classList.add('on'); }
+    if (playing){ offset = now(); killSrc(); paint(); stage.innerHTML = 'сравни <em>до</em> и <em>после</em>'; return; }
+    start(offset >= len() - 0.1 ? 0 : offset);
+  });
+
+  if (seekEl){
+    var toOf = function(){ return (parseInt(seekEl.value, 10) / 1000) * len(); };
+    // во время перетаскивания только показываем позицию, звук не трогаем
+    seekEl.addEventListener('input', function(){
+      seekEl.dragging = true;
+      seekEl.style.setProperty('--p', (seekEl.value / 10).toFixed(1) + '%');
+      offset = toOf();
+      timeEl.textContent = fmt(offset) + ' / ' + fmt(len());
+    });
+    // отпустили — перескакиваем одним движением
+    ['change','pointerup','touchend','pointercancel'].forEach(function(ev){
+      seekEl.addEventListener(ev, function(){
+        if (!seekEl.dragging) return;
+        seekEl.dragging = false;
+        if (!pairs.length) return;
+        offset = toOf();
+        if (playing) startBoth(offset); else paint();
+      });
+    });
+  }
+
+  sw.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-v]');
+    if (!b || !pairs.length) return;
+    switchVersion(+b.dataset.v);
+  });
+
+  exBox.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-p]');
+    if (!b) return;
+    selectExample(+b.dataset.p);
+  });
+
+  function boot(){
+    if (!ctx){
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch(e){}
+      master = ctx.createGain(); master.gain.value = 1.0; master.connect(ctx.destination);
+    }
+    load().catch(function(){});
+  }
+  boot();
+
+  document.addEventListener('touchstart', function(){ if (ctx && ctx.state === 'suspended') ctx.resume(); }, {passive:true});
+  document.addEventListener('click', function(){ if (ctx && ctx.state === 'suspended') ctx.resume(); });
+
+  if (mainAudio) mainAudio.addEventListener('play', function(){
+    if (playing){ offset = now(); killSrc(); paint(); stage.innerHTML = 'сравни <em>до</em> и <em>после</em>'; }
+  });
+})();
 </script>
 </body>
 </html>
